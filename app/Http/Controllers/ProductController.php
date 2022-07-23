@@ -18,13 +18,18 @@ class ProductController extends Controller
         return view('admin.product', compact('products'));
     }
 
-    public function showproducts($id)
+    public function showproducts(Request $request)
     {
+// category id number from query 
 
-    $category = Category::findOrFail($id);
-    $products = Product::where('category_id', $id)->get();
-    return view('Pages.shop', compact('products', 'category'));
 
+    $category = (int)$request->query('category');
+if($category){
+    $products = Product::where('category_id', $category)->get();
+}else{
+    $products = Product::all();
+}
+        return view('Pages.shop', compact('products'));
     }
 
     // public function showproducts(Request $request)
@@ -146,11 +151,8 @@ class ProductController extends Controller
         return redirect('admin/products')->with('success', 'Deleted successfully');
     }
 
-    function productview($cate_id, $product_id)
+    function productview( $product_id)
     {
-        if(Category::where('id', $cate_id)->exists())
-            
-        {
            if(Product::where('id', $product_id)->exists())
            {
             $products = Product::where('id', $product_id)->first();
@@ -160,10 +162,6 @@ class ProductController extends Controller
            else{
             return redirect('/')->with('error', 'Product not found');
            }
-    }
-    else{
-        return redirect('/')->with('error', 'Category not found');
-    }
     }
 }
 

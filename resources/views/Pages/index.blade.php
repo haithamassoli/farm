@@ -237,7 +237,7 @@
                             <div class="services-one__single-content text-center">
                                 <h3><a href="services-details.html">{{$values->name}}</a></h3>
                               <p>{{$values->description}}</p>
-                                <a href="product/{{$values->id}}" class="read-more-btn"><span
+                                <a href="product?category={{$values->id}}" class="read-more-btn"><span
                                         class="icon-right-arrow-2"></span></a>
                             </div>
                         </div>

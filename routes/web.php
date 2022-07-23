@@ -20,7 +20,7 @@ use App\Http\Controllers\HomeController;
 
 
 Auth::routes();
-Route::get('productdetails/{cate_id}/{prod_id}', [ProductController::class, 'productview']);
+Route::get('productdetails/{prod_id}', [ProductController::class, 'productview']);
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -35,7 +35,7 @@ Route::get('/contact', function () {
 Route::get('add-to-cart/{id}', 'CartController@addToCart');
 
 
-Route::get('/product/{id}', [ProductController::class, 'showproducts']);
+// Route::get('/product/{id}', [ProductController::class, 'showproducts']);
 Route::get('/product', [ProductController::class, 'show']);
 // Route::get('/shop', function () {
 //     return view('Pages.shop');
