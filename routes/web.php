@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
@@ -32,7 +32,7 @@ Route::get('/contact', function () {
 });
 
 
-Route::get('add-to-cart/{id}', 'CartController@addToCart');
+// Route::get('add-to-cart/{id}', 'CartController@addToCart');
 
 
 // Route::get('/product/{id}', [ProductController::class, 'showproducts']);
@@ -41,9 +41,7 @@ Route::get('/product', [ProductController::class, 'show']);
 //     return view('Pages.shop');
 // });
 
-Route::get('/cart', [CartController::class, 'index']);
-// Route::post('/cart/{id}', [CartController::class, 'show']);
-Route::resource('carts', CartController::class);
+Route::resource('/cart', CartController::class);
 
 Route::get('/productdetails', function () {
     return view('Pages.product-details');

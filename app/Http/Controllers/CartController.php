@@ -18,8 +18,16 @@ class CartController extends Controller
     public function index()
     {
 
-        $carts = Cart::all();
-        return view('pages.cart', compact('carts'));
+        $cart = Cart::where('user_id', auth()->user()->id)->get();
+        foreach ($cart as $key => $value) {
+            $value->product = Product::find($value->product_id);
+        }
+        
+        $total = 0;
+        foreach ($cart as $key => $value) {
+            $total += $value->product->product_price * $value->product_quntity;
+        }
+        return view('pages.cart', compact('cart', 'total'));
 
     }
 
@@ -33,48 +41,48 @@ class CartController extends Controller
         //
     }
 
-    public function addToCart($id)
-    {
-        $product = Product::find($id);
+    // public function addToCart($id)
+    // {
+    //     $product = Product::find($id);
 
-        if (!$product) {
+    //     if (!$product) {
 
-            abort(404);
-        }
-        $cart = session()->get('cart');
-        if (!$cart) {
-            $cart = [
-                $id => [
-                    "name" => $product->name,
-                    "quantity" => 1,
-                    "price" => $product->price,
-                    "photo" => $product->photo
-                ]
-            ];
-            session()->put('cart', $cart);
-            return redirect()->back()->with('success', 'Product added to cart successfully');
-        }
-      // if cart not empty then check if this product exist then increment quantity
+    //         abort(404);
+    //     }
+    //     $cart = session()->get('cart');
+    //     if (!$cart) {
+    //         $cart = [
+    //             $id => [
+    //                 "name" => $product->name,
+    //                 "quantity" => 1,
+    //                 "price" => $product->price,
+    //                 "photo" => $product->photo
+    //             ]
+    //         ];
+    //         session()->put('cart', $cart);
+    //         return redirect()->back()->with('success', 'Product added to cart successfully');
+    //     }
+    //   // if cart not empty then check if this product exist then increment quantity
 
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-            session()->put('cart', $cart);
-            return redirect()->back()->with('success', 'Product added to cart successfully');
-        }
-      // if item not exist in cart then add to cart with quantity = 1
+    //     if (isset($cart[$id])) {
+    //         $cart[$id]['quantity']++;
+    //         session()->put('cart', $cart);
+    //         return redirect()->back()->with('success', 'Product added to cart successfully');
+    //     }
+    //   // if item not exist in cart then add to cart with quantity = 1
 
-        else {
-            $cart[$id] = [
-                "name" => $product->name,
-                "quantity" => 1,
-                "price" => $product->price,
-                "photo" => $product->photo
-            ];
-            session()->put('cart', $cart);
-            return redirect()->back()->with('success', 'Product added to cart successfully');
-        }
+    //     else {
+    //         $cart[$id] = [
+    //             "name" => $product->name,
+    //             "quantity" => 1,
+    //             "price" => $product->price,
+    //             "photo" => $product->photo
+    //         ];
+    //         session()->put('cart', $cart);
+    //         return redirect()->back()->with('success', 'Product added to cart successfully');
+    //     }
 
-    }
+    // }
 
 
     /**
@@ -87,16 +95,17 @@ class CartController extends Controller
     {
         $request->validate([
             'product_id' => 'required',
-            'quantity' => 'required',
+            'product_quntity' => 'required',
         ]);
+        
         $product = Product::find($request->input('product_id'));
         $cart = Cart::create([
+            "user_id" => auth()->user()->id,
             'product_id' => $request->input('product_id'),
-            'quantity' => $request->input('quantity'),
-            'price' => $product->price,
-            'total' => $product->price * $request->input('quantity'),
+            'product_quntity' => $request->input('product_quntity'),
+            'total' => $product->product_price * $request->input('product_quntity'),
         ]);
-        return redirect('cart')->with('success', 'Added successfully');
+        return redirect()->back()->with('success', 'Product added to cart successfully');
     }
 
     /**
