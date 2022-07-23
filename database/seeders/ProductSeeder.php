@@ -17,14 +17,14 @@ class ProductSeeder extends Seeder
             'product_name' => 'Gardening Water Spray',
             'product_description' => 'Very God Quality & Nice',
             'product_image' => '1658125968-plant.jpg',
-            'product_price' => '100$',
+            'product_price' => '100',
             'category_id' => '1',
         ]);
         Product::create([
             'product_name' => 'Gardening Water Spray',
             'product_description' => 'Very God Quality & Nice',
             'product_image' => '1658125968-plant.jpg',
-            'product_price' => '100$',
+            'product_price' => '100',
             'category_id' => '1',
         ]);
 
@@ -32,7 +32,7 @@ class ProductSeeder extends Seeder
             'product_name' => 'Gardening Water Spray',
             'product_description' => 'Very God Quality & Nice',
             'product_image' => '1658125968-plant.jpg',
-            'product_price' => '100$',
+            'product_price' => '100',
             'category_id' => 1,
         ]);
 
@@ -43,21 +43,21 @@ class ProductSeeder extends Seeder
             'product_name' => 'Flextools Gardening Trowel ',
             'product_description' => 'Very God Quality & Nice',
             'product_image' => '1658125947-hathim.jpg',
-            'product_price' => '200$',
+            'product_price' => '200',
             'category_id' => 2,
         ]);
         Product::create([
             'product_name' => 'Flextools Gardening Trowel ',
             'product_description' => 'Very God Quality & Nice',
             'product_image' => '1658125947-hathim.jpg',
-            'product_price' => '200$',
+            'product_price' => '200',
             'category_id' => 2,
         ]);
         Product::create([
             'product_name' => 'Flextools Gardening Trowel ',
             'product_description' => 'Very God Quality & Nice',
             'product_image' => '1658125947-hathim.jpg',
-            'product_price' => '200$',
+            'product_price' => '200',
             'category_id' => 2,
         ]);
 
@@ -67,14 +67,14 @@ class ProductSeeder extends Seeder
             'product_name' => 'Gardening Hand Gloves',
             'product_description' => 'Very God Quality & Nice',
             'product_image' => '1658125933-Flaower.jpg',
-            'product_price' => '100$',
+            'product_price' => '100',
             'category_id' => 3,
         ]);
         Product::create([
             'product_name' => 'Gardening Hand Gloves',
             'product_description' => 'Very God Quality & Nice',
             'product_image' => '1658125933-Flaower.jpg',
-            'product_price' => '100$',
+            'product_price' => '100',
             'category_id' => 3,
         ]);
 
@@ -82,7 +82,7 @@ class ProductSeeder extends Seeder
             'product_name' => 'Gardening Hand Gloves',
             'product_description' => 'Very God Quality & Nice',
             'product_image' => '1658125933-Flaower.jpg',
-            'product_price' => '100$',
+            'product_price' => '100',
             'category_id' => 3,
         ]);
 
