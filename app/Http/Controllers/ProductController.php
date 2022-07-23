@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -20,28 +21,16 @@ class ProductController extends Controller
 
     public function showproducts(Request $request)
     {
-// category id number from query 
 
-
-    $category = (int)$request->query('category');
-if($category){
-    $products = Product::where('category_id', $category)->get();
-}else{
-    $products = Product::all();
-}
+        $category = (int)$request->query('category');
+        if ($category) {
+            $products = Product::where('category_id', $category)->get();
+        } else {
+            $products = Product::all();
+        }
         return view('Pages.shop', compact('products'));
     }
 
-    // public function showproducts(Request $request)
-    // {
-
-    //     if ($request->query('category_id')) {
-    //         $products = Product::where('category_id', $request->query('category_id'))->get();
-    //     } else {
-    //         $products = Product::all();
-    //         return view('Pages.shop', compact('products'));
-    //     }
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -86,12 +75,15 @@ if($category){
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Request $request)
     {
-        $category = Category::all();
-        $products = Product::all();
-        return view('Pages.shop', compact('products', 'category'));
-
+        $category = (int)$request->query('category');
+        if ($category) {
+            $products = Product::where('category_id', $category)->get();
+        } else {
+            $products = Product::all();
+        }
+        return view('Pages.shop', compact('products'));
     }
 
     /**
@@ -105,7 +97,6 @@ if($category){
         //
         $products = Product::findOrFail($id);
         return view('admin.edit_product', compact('products'));
-
     }
 
     /**
@@ -151,17 +142,13 @@ if($category){
         return redirect('admin/products')->with('success', 'Deleted successfully');
     }
 
-    function productview( $product_id)
+    function productview($product_id)
     {
-           if(Product::where('id', $product_id)->exists())
-           {
+        if (Product::where('id', $product_id)->exists()) {
             $products = Product::where('id', $product_id)->first();
             return view('Pages.product-details', compact('products'));
-
-           }
-           else{
+        } else {
             return redirect('/')->with('error', 'Product not found');
-           }
+        }
     }
 }
-
